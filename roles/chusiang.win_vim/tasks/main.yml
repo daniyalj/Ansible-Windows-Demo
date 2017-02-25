@@ -1,0 +1,15 @@
+#!/usr/bin/env ansible-playbook
+
+---
+
+- name: Create temp directory
+  win_file:
+    path: '{{ tmp_path }}'
+    state: directory
+
+# Install Vim.
+- name: delegate to 'msi' system for installation
+  include: use-msi.yml
+  when: "ansible_os_family == 'Windows'"
+
+# vim:ft=ansible :
